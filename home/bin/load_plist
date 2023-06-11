@@ -1,0 +1,25 @@
+#!/bin/bash
+
+plist="$1"
+launch_agents="$HOME/Library/LaunchAgents"
+
+# Find the plist filename is the last part of the path, ignoring the folder
+plistFilename=$(basename "$plist")
+if [ -f "$launch_agents/$plistFilename" ]; then
+  #    echo "It seems the brew auto-update PLIST file is already loaded. Enter 1 to replace, or 2 to skip:"
+  #    select yn in "Replace" "Skip"; do
+  #      case $yn in
+  #        Replace ) break;;
+  #        Skip ) echo "Skipping..." && return;;
+  #      esac
+  #    done
+  echo "$plistFilename is already in LaunchAgents..." && return
+fi
+
+echo "Loading $plist into LaunchAgents..."
+
+# Move the PLIST file to the LaunchAgents folder
+cp "$plist" "$launch_agents/"
+
+# Load the PLIST file
+launchctl load "$launch_agents/$plist"

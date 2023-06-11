@@ -1,0 +1,11 @@
+requests
+numpy
+tensorflow
+torch
+pandas
+beautifulsoup4
+opencv-python
+openai
+langchain
+gradio
+jupyter

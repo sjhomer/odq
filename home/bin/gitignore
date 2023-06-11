@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# Define a function to add common gitignore patterns to a file
+file=".gitignore"
+node=false
+python=false
+prompt=true
+
+defaultIgnores=(
+  "webstorm"
+  "visualstudiocode"
+  "osx"
+  "windows"
+  "linux"
+)
+
+# Add gitignore patterns to the target file
+function add_gitignore() {
+  ignore_type="$1"
+  file=".gitignore"
+
+  # Borrowed from the ZSH gitignore plugin to avoid requiring dependencies
+  # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/gitignore/gitignore.plugin.zsh
+  curl -fLw '\n' "https://www.gitignore.io/api/$ignore_type" >>"$file" 2>/dev/null
+
+  # Display a message indicating which ignores were added
+  echo "$ignore_type added"
+}
+
+# Generated at https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=Red%20Phoenix&text=Gitignore
+echo "  ________.__  __  .__   ____"
+echo " /  _____/|__|/  |_|__| / ___\ ____   ___________  ____"
+echo "/   \  ___|  \   __\  |/ /_/  >    \ /  _ \_  __ \/ __ \\"
+echo "\    \_\  \  ||  | |  |\___  /   |  (  <_> )  | \|  ___/"
+echo " \______  /__||__| |__/_____/|___|  /\____/|__|   \___  >"
+echo "        \/                        \/                  \/"
+printf "\nA simple script to generate essential gitignore patterns for a project."
+
+echo "This will automatically include:"
+# List default ignores
+for type in "${defaultIgnores[@]}"; do
+  echo "* $type"
+done
+
+# Check if the file already exists
+if [ -e "$file" ]; then
+  echo -n "A '$file' already exists! Do you want to replace it? Note, note replacing it could lead to some oddities. [y/N] "
+  IFS= read -r input
+  case $(echo "$input" | tr '[:upper:]' '[:lower:]') in
+  y | yes)
+    rm "$file"
+    ;;
+  *)
+    printf "No problem, just be sure to review and correct things after running this script!\n"
+    ;;
+  esac
+fi
+
+# Parse command line options
+while getopts ":f:a:" opt; do
+  case $opt in
+  f)
+    file="$OPTARG"
+    ;;
+  a)
+    case $OPTARG in
+    node)
+      node=true
+      prompt=false
+      ;;
+    python)
+      python=true
+      prompt=false
+      ;;
+    skip)
+      prompt=false
+      ;;
+    *)
+      echo "Invalid argument: $OPTARG" >&2
+      return 1
+      ;;
+    esac
+    ;;
+  \?)
+    echo "Invalid option: -$OPTARG" >&2
+    return 1
+    ;;
+  esac
+done
+
+# Prompt the user for additional gitignore patterns if necessary
+if $prompt; then
+  echo "Generate Python ignores instead of NodeJS? [y/N] "
+  IFS= read -r input
+  case $(echo "$input" | tr '[:upper:]' '[:lower:]') in
+  y | yes)
+    python=true
+    ;;
+  *)
+    node=true
+    ;;
+  esac
+fi
+
+printf "↤↤↤↤↤ OK, let's generate some gitignore patterns! ↦↦↦↦↦\n"
+
+for type in "${defaultIgnores[@]}"; do
+  add_gitignore "$type"
+done
+
+# Add additional gitignore patterns based on command line options
+if $node; then
+  add_gitignore "node"
+fi
+if $python; then
+  add_gitignore "python"
+fi
+
+echo -n "【｡_｡】 $file complete!!! 【｡_｡】"
+echo "Go forth and slay thy code good dev!"
+
