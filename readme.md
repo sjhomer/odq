@@ -23,9 +23,9 @@ Thus, the birth of **ODQ, the OSx Developer Quickstart**.
 > is designed to ready your new Mac from **a single command**, controlled by a configuration file of options and
 > libs/applications you want installed.
 
-One command, and you're ready to go!
+One command, and you're ready to go! No dependencies, no fuss, no muss. 🥳
 ```shell
-$ ./odq.sh
+$ bash <(curl -s https://raw.githubusercontent.com/sjhomer/odq/main/web-install.sh)
 ```
 
 ## Sensible developer defaults, easily overridable!
@@ -150,3 +150,10 @@ All configuration is done in the [`config.sh`](config.sh) file, which you can ed
 
 > Nerd Fonts patches developer targeted fonts with a high number of glyphs (icons). Specifically to add a high number of extra glyphs from popular ‘iconic fonts’ such as Font Awesome, Devicons, Octicons, and others.
 
+```shell         
+ ,----.               ,---.                ,--.  ,--.          ,---.        ,------.  ,------.,--.   ,--. 
+'  .-./    ,---.     /  .-' ,---. ,--.--.,-'  '-.|  ,---.     |  o ,-.      |  .-.  \ |  .---' \  `.'  /  
+|  | .---.| .-. |    |  `-,| .-. ||  .--''-.  .-'|  .-.  |    .'     /_     |  |  \  :|  `--,   \     /   
+'  '--'  |' '-' '    |  .-'' '-' '|  |     |  |  |  | |  |    |  o  .__)    |  '--'  /|  `---.   \   /    
+ `------'  `---'     `--'   `---' `--'     `--'  `--' `--'     `---'        `-------' `------'    `-'              
+```

@@ -21,11 +21,11 @@ NOTE: Sudo access will be required for some steps.\n
 Begin OSx Development Quickstart? "
 
 # Prompt user to begin or exit
-echo "Enter 1 to begin, or 2 to exit."
+echo "Enter 1 to begin, or 2 to review/adjust the config.sh first."
 select yn in "Continue" "Exit"; do
   case $yn in
     Continue ) break;;
-    Exit ) exit;;
+    Exit ) echo -n "No worries! Take your time and adjust the \`config.sh\` before re-running \`. $CWD/odq.sh\`" && return 0;;
   esac
 done
 
