@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Clear out previous downloads
+rm -rf ~/Downloads/odq-main/
+rm -rf ~/Downloads/odq.zip
+
 # Download the repository using curl
 curl -L -o ~/Downloads/odq.zip https://github.com/sjhomer/odq/archive/refs/heads/main.zip
 
