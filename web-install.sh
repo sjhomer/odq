@@ -6,11 +6,11 @@ rm -rf ~/Downloads/odq.zip
 
 # Download the repository using curl
 echo "Downloading odq..."
-curl -L -o ~/Downloads/odq.zip https://github.com/sjhomer/odq/archive/refs/heads/main.zip -s
+curl -L -o ~/Downloads/odq.zip https://github.com/sjhomer/odq/archive/refs/heads/main.zip &> /dev/null
 
 # Unzip the downloaded file
 echo "Unzipping odq..."
-unzip ~/Downloads/odq.zip -d ~/Downloads/ -q
+unzip ~/Downloads/odq.zip -d ~/Downloads/ &> /dev/null
 
 # Change directory to the unzipped repository
 echo "Attempting to run odq..."
