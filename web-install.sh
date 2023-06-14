@@ -5,13 +5,16 @@ rm -rf ~/Downloads/odq-main/
 rm -rf ~/Downloads/odq.zip
 
 # Download the repository using curl
-curl -L -o ~/Downloads/odq.zip https://github.com/sjhomer/odq/archive/refs/heads/main.zip
+echo "Downloading odq..."
+curl -L -o ~/Downloads/odq.zip https://github.com/sjhomer/odq/archive/refs/heads/main.zip -s
 
 # Unzip the downloaded file
-unzip ~/Downloads/odq.zip -d ~/Downloads/
+echo "Unzipping odq..."
+unzip ~/Downloads/odq.zip -d ~/Downloads/ -q
 
 # Change directory to the unzipped repository
-cd ~/Downloads/odq-main/
+echo "Attempting to run odq..."
+cd ~/Downloads/odq-main/ || exit
 
 # Make the odq.sh script executable
 chmod +x odq.sh
