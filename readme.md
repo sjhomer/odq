@@ -25,7 +25,7 @@ Thus, the birth of **ODQ, the OSx Developer Quickstart**.
 
 One command, and you're ready to go! No dependencies, no fuss, no muss. 🥳
 ```shell
-$ bash <(curl -s https://raw.githubusercontent.com/sjhomer/odq/main/web-install.sh)
+bash <(curl -s https://raw.githubusercontent.com/sjhomer/odq/main/web-install.sh)
 ```
 
 ## Sensible developer defaults, easily overridable!
