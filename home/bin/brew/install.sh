@@ -3,10 +3,14 @@
 # Check if brew is already installed
 if command -v brew &> /dev/null; then
   echo "Brew is already installed, running updater..."
-  source "$HOME"/bin/brew/autoUpdateOnStartup.sh
+  # source "$HOME"/bin/brew/autoUpdateOnStartup.sh
 else
   echo "Installing brew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+ # Add brew to profile
+   (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/seanhomer/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Initialize brew auto-update on system load
