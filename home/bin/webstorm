@@ -1,0 +1,21 @@
+#!/bin/bash
+
+declare -a ideargs=()
+declare -- wait=""
+
+for o in "$@"; do
+  if [[ "$o" = "--wait" || "$o" = "-w" ]]; then
+    wait="-W"
+    o="--wait"
+  fi
+  if [[ "$o" =~ " " ]]; then
+    ideargs+=("\"$o\"")
+  else
+    ideargs+=("$o")
+  fi
+done
+
+# Find the WebStorm application in the Applications directory
+webstorm_path="/Applications/WebStorm.app"
+
+open -na "$webstorm_path/Contents/MacOS/webstorm" $wait --args "${ideargs[@]}"
