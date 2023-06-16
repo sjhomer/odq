@@ -1,0 +1,21 @@
+#!/bin/bash
+
+declare -a ideargs=()
+declare -- wait=""
+
+for o in "$@"; do
+  if [[ "$o" = "--wait" || "$o" = "-w" ]]; then
+    wait="-W"
+    o="--wait"
+  fi
+  if [[ "$o" =~ " " ]]; then
+    ideargs+=("\"$o\"")
+  else
+    ideargs+=("$o")
+  fi
+done
+
+# Find the PyCharm CE application in the Applications directory
+pycharm_path="/Applications/PyCharm CE.app"
+
+open -na "$pycharm_path/Contents/MacOS/pycharm" $wait --args "${ideargs[@]}"
